@@ -5,12 +5,32 @@ showSteps = True
 anyradius = False
 
 def display_image(image):
+    """
+    Displys an image and waits for a key press from the user.
+    :param image:
+        The image to display as a numpy array.
+    :return:
+        Nothing.
+    """
+
     cv.imshow(cv.namedWindow("image", cv.WINDOW_AUTOSIZE), image)
     cv.waitKey(0)
     cv.destroyAllWindows()
     return
 
 def resize_image(image, width, height):
+    """
+    Resizes an image to the given hight and width.
+    :param image:
+        The image to resize as a numpy array.
+    :param width:
+        The width to resize the image to.
+    :param height:
+        The height to resize the image to.
+    :return:
+        The resized image.
+    """
+
     resized_image = cv.resize(image, (width, height))
     if showSteps == True:
         display_image(resized_image)
@@ -18,24 +38,58 @@ def resize_image(image, width, height):
     
 
 def RGB_to_greyscale(image):
+    """
+    Converts an RGB image to grayscale.
+    :param image:
+        The image to convert as a numpy array.
+    :return:
+        The grayscale image.
+    """
+    
     greyImage = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
     if showSteps == True:
         display_image(greyImage)
     return greyImage
 
-def blur_image(image):
-    blurredImage = cv.medianBlur(image, 19) 
+def blur_image(image, ksize = 19):
+    """
+    Blurs an image using a median filter.
+    :param image:
+        The image to Blur as a numpy array.
+    :param ksize:
+        The size of the mask, default is 19.
+    :return:
+        The blurred image.
+    """
+
+    blurredImage = cv.medianBlur(image, ksize) 
     if showSteps == True:
         display_image(blurredImage)
     return blurredImage
 
 def laplace_filter(image):
+    """
+    Applies a laplace filter.
+    :param image:
+        The image as a numpy array.
+    :return:
+        The image after applying the filter.
+    """
+
     laplaceImage = cv.Laplacian(image,-1, ksize=5)
     if showSteps == True:
         display_image(laplaceImage)
     return laplaceImage
 
 def threshold_image(image):
+    """
+    Applies thresholding to the input image.
+    :param image:
+        The image to threshold as a numpy array.
+    :return:
+        The image after thresholding.
+    """
+
     ret, thresholdImage = cv.threshold(image, 250, 280, cv.THRESH_BINARY)
     if showSteps == True:
         display_image(thresholdImage)
@@ -43,6 +97,21 @@ def threshold_image(image):
 
 # an implementation of the hough circle transform.
 def circular_hough_transform(image, search_threshold):
+    """
+    Applies circular hough transform to the input image.
+    :param image:
+        The image to process.
+    :param radius_range:
+        A list that contains 2 elements, the first is the minimum radius to start searching from and the second is the 
+        max radius to stop searching at.
+    :param search_threshold:
+        The minimum number of votes to consider, the number of votes must be equal or bigger in order for the circle to 
+        be considered true.
+    :return:
+        2 lists, the first is the list of detected circles, each member of the list consists of a position (x, y) and 
+        a radius, the second list is the lists of radius only.
+    """
+
     (rows, columns) = image.shape
     angle = 0
     angle_count = 180
@@ -107,9 +176,21 @@ def circular_hough_transform(image, search_threshold):
 
     return circles, circles_radias
 
-# checks if a circle has an exact duplicate that has already been detected,
-# and also check if there are circles that are very close to the circle.
 def has_duplicate_circle(circle_x, circle_y, circle_r, circles):
+    """
+    checks if a circle has an exact duplicate or if other detected circles have close parameters to this circle.
+    :param circle_x:
+        the x coordinate of the circle to check.
+    :param circle_y:
+        the y coordinate of the circle to check.
+    :param circle_r:
+        the radius of the circle to check.
+    :param circles:
+        the array of circles that have been already detected.
+    :return:
+        True if the circle has a duplicate and False otherwise.
+    """
+
     for circle in circles:
         if circle == (circle_x, circle_y, circle_r):
             return True

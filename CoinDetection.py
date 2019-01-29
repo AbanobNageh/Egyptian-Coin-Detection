@@ -169,8 +169,6 @@ def circular_hough_transform(image, radius_range, search_threshold):
     
     return circles, circles_radias
 
-# checks if a circle has an exact duplicate that has already been detected,
-# and also check if there are circles that are very close to the circle.
 def has_duplicate_circle(circle_x, circle_y, circle_r, circles):
     """
     checks if a circle has an exact duplicate or if other detected circles have close parameters to this circle.
