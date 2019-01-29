@@ -11,4 +11,12 @@ A sample of the result:
 
 the original image:
 
-![alt text](https://github.com/goodking159/Egyptian-Coin-Detection/blob/master/test_image.png "The original image")
+![alt text](https://github.com/goodking159/Egyptian-Coin-Detection/blob/master/result%20samples/Original.png "The original image")
+
+After Canny edge detection:
+
+![alt text](https://github.com/goodking159/Egyptian-Coin-Detection/blob/master/result%20samples/After%20Canny.png "After canny edge detection")
+
+Final image:
+
+![alt text](https://github.com/goodking159/Egyptian-Coin-Detection/blob/master/result%20samples/Final%20result.png "The final result")
