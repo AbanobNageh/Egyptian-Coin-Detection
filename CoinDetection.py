@@ -148,12 +148,15 @@ for vertex in detected_circles:
     if (vertex[2] >= min_radius and vertex[2] <= min_radius + 2):
         cv.circle(resized_image, (vertex[1], vertex[0]), vertex[2], (255,0,0), 1)
         cv.rectangle(resized_image, (vertex[1]-2, vertex[0]-2), (vertex[1]-2, vertex[0]-2), (0,0,255), 3)
+        total_money = total_money + 0.25
     elif (vertex[2] >= min_radius + 3 and vertex[2] <= max_radius - 3):
         cv.circle(resized_image, (vertex[1], vertex[0]), vertex[2], (0,255,0), 1)
         cv.rectangle(resized_image, (vertex[1]-2, vertex[0]-2), (vertex[1]-2, vertex[0]-2), (0,0,255), 3)
+        total_money = total_money + 0.5
     elif (vertex[2] >= max_radius - 2 and vertex[2] <= max_radius):
         cv.circle(resized_image, (vertex[1], vertex[0]), vertex[2], (0,0,255), 1)
         cv.rectangle(resized_image, (vertex[1]-2, vertex[0]-2), (vertex[1]-2, vertex[0]-2), (0,0,255), 3)
+        total_money = total_money + 1.0
     else:
         cv.circle(resized_image, (vertex[1], vertex[0]), vertex[2], (255,255,255), 1)
         cv.rectangle(resized_image, (vertex[1]-2, vertex[0]-2), (vertex[1]-2, vertex[0]-2), (0,0,0), 3)
