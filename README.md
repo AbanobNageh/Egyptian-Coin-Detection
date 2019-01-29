@@ -11,4 +11,4 @@ A sample of the result:
 
 the original image:
 
-![alt text](https://github.com/goodking159/Egyptian-Coin-Detection/blob/master/test_image.png "The original image")
+![alt text](https://github.com/goodking159/Egyptian-Coin-Detection/blob/master/result%20samples/Original.png "The original image")
